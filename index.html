@@ -5,71 +5,48 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>ModaLatina Global</title>
   <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <style>
+    summary { cursor: pointer; }
+  </style>
 </head>
 <body class="bg-gray-50 text-gray-800">
 
-  <!-- Hero Section -->
-  <header class="relative bg-cover bg-center h-96" style="background-image: url('https://via.placeholder.com/1200x400');">
+  <!-- Hero con buscador -->
+  <header class="relative bg-cover bg-center h-96" style="background-image: url('https://placehold.co/1200x400');">
     <div class="absolute inset-0 bg-black bg-opacity-50 flex flex-col justify-center items-center text-white text-center">
       <h1 class="text-4xl md:text-6xl font-bold">ModaLatina Global</h1>
       <p class="text-lg md:text-2xl mt-2">Tu pasarela de marcas latinoamericanas asequibles</p>
       <div class="mt-6 flex space-x-2">
-        <input type="text" placeholder="Buscar prendas o marcas..." class="p-2 rounded w-60 text-black">
-        <button class="bg-pink-500 hover:bg-pink-600 text-white px-4 py-2 rounded">Buscar</button>
+        <input id="buscador" type="text" placeholder="Buscar prendas o marcas..." class="p-2 rounded w-60 text-black">
+        <button onclick="buscar()" class="bg-pink-500 hover:bg-pink-600 text-white px-4 py-2 rounded">Buscar</button>
       </div>
     </div>
   </header>
 
-  <!-- Filtros -->
-  <section class="p-6 bg-white">
-    <h2 class="text-2xl font-bold mb-4">Filtrar por</h2>
-    <div class="flex flex-wrap gap-4">
-      <div>
-        <label class="font-semibold">Precio:</label><br>
-        <input type="checkbox" class="filter" data-type="price" value="low"> <span>$</span><br>
-        <input type="checkbox" class="filter" data-type="price" value="medium"> <span>$$</span><br>
-        <input type="checkbox" class="filter" data-type="price" value="high"> <span>$$$</span>
-      </div>
-      <div>
-        <label class="font-semibold">Valoración:</label><br>
-        <input type="checkbox" class="filter" data-type="rating" value="5"> ★★★★★<br>
-        <input type="checkbox" class="filter" data-type="rating" value="4"> ★★★★☆
-      </div>
-      <div>
-        <label class="font-semibold">Categoría:</label><br>
-        <input type="checkbox" class="filter" data-type="category" value="ropa"> Ropa<br>
-        <input type="checkbox" class="filter" data-type="category" value="accesorios"> Accesorios
-      </div>
-    </div>
-  </section>
-
-  <!-- Directorio de marcas -->
+  <!-- Directorio de Marcas -->
   <section class="p-6">
     <h2 class="text-3xl font-bold mb-6">Marcas destacadas</h2>
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-      <!-- Marca -->
-      <div class="border p-4 rounded shadow bg-white brand-card" data-price="medium" data-rating="5" data-category="ropa">
-        <img src="https://via.placeholder.com/150x150" alt="Logo Boho Hunter" class="mx-auto">
-        <h3 class="text-xl font-semibold text-center mt-2">Boho Hunter</h3>
-        <p class="text-center text-sm">Estilo bohemio con acento tropical.</p>
-        <p class="text-center font-bold mt-2">Desde $40 USD</p>
-        <p class="text-center text-yellow-400 text-lg">★★★★★</p>
-        <div class="mt-4 space-y-2">
-          <div class="border p-2 rounded flex items-center justify-between">
-            <img src="https://via.placeholder.com/200x200" class="w-16">
-            <div class="flex-1 ml-3">
-              <p>Vestido Playa</p>
-              <p class="text-sm">$45</p>
-              <button class="text-pink-500 text-sm underline">Visitar tienda</button>
+    <div id="marcas-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+      <!-- Marca 1 -->
+      <div class="marca-card p-4 bg-white border rounded shadow" data-nombre="Boho Hunter">
+        <img src="https://placehold.co/150x150" alt="Boho Hunter" class="mx-auto mb-2">
+        <h3 class="text-xl font-semibold text-center">Boho Hunter</h3>
+        <p class="text-sm text-center">Estilo bohemio tropical. Desde $40 USD</p>
+        <p class="text-center text-yellow-400">★★★★★</p>
+        <div class="space-y-2 mt-4">
+          <div class="producto-card border p-2 flex items-center justify-between" data-nombre="Vestido Playa">
+            <img src="https://placehold.co/80" class="w-16">
+            <div class="ml-2">
+              <p>Vestido Playa</p><p class="text-sm">$45</p>
+              <button class="text-pink-500 text-sm">Visitar tienda</button>
             </div>
             <button class="favorite-btn text-xl" data-id="boho1">♥</button>
           </div>
-          <div class="border p-2 rounded flex items-center justify-between">
-            <img src="https://via.placeholder.com/200x200" class="w-16">
-            <div class="flex-1 ml-3">
-              <p>Top Crochet</p>
-              <p class="text-sm">$38</p>
-              <button class="text-pink-500 text-sm underline">Visitar tienda</button>
+          <div class="producto-card border p-2 flex items-center justify-between" data-nombre="Top Crochet">
+            <img src="https://placehold.co/80" class="w-16">
+            <div class="ml-2">
+              <p>Top Crochet</p><p class="text-sm">$38</p>
+              <button class="text-pink-500 text-sm">Visitar tienda</button>
             </div>
             <button class="favorite-btn text-xl" data-id="boho2">♥</button>
           </div>
@@ -77,28 +54,25 @@
       </div>
 
       <!-- Marca 2 -->
-      <div class="border p-4 rounded shadow bg-white brand-card" data-price="low" data-rating="4" data-category="accesorios">
-        <img src="https://via.placeholder.com/150x150" alt="Logo Shop Mi Vida" class="mx-auto">
-        <h3 class="text-xl font-semibold text-center mt-2">Shop Mi Vida</h3>
-        <p class="text-center text-sm">Color, arte y moda accesible.</p>
-        <p class="text-center font-bold mt-2">Desde $25 USD</p>
-        <p class="text-center text-yellow-400 text-lg">★★★★☆</p>
-        <div class="mt-4 space-y-2">
-          <div class="border p-2 rounded flex items-center justify-between">
-            <img src="https://via.placeholder.com/200x200" class="w-16">
-            <div class="flex-1 ml-3">
-              <p>Aretes Artesanales</p>
-              <p class="text-sm">$28</p>
-              <button class="text-pink-500 text-sm underline">Visitar tienda</button>
+      <div class="marca-card p-4 bg-white border rounded shadow" data-nombre="Shop Mi Vida">
+        <img src="https://placehold.co/150x150" alt="Shop Mi Vida" class="mx-auto mb-2">
+        <h3 class="text-xl font-semibold text-center">Shop Mi Vida</h3>
+        <p class="text-sm text-center">Arte y moda accesible. Desde $25 USD</p>
+        <p class="text-center text-yellow-400">★★★★☆</p>
+        <div class="space-y-2 mt-4">
+          <div class="producto-card border p-2 flex items-center justify-between" data-nombre="Aretes Artesanales">
+            <img src="https://placehold.co/80" class="w-16">
+            <div class="ml-2">
+              <p>Aretes Artesanales</p><p class="text-sm">$28</p>
+              <button class="text-pink-500 text-sm">Visitar tienda</button>
             </div>
             <button class="favorite-btn text-xl" data-id="vida1">♥</button>
           </div>
-          <div class="border p-2 rounded flex items-center justify-between">
-            <img src="https://via.placeholder.com/200x200" class="w-16">
-            <div class="flex-1 ml-3">
-              <p>Bolso Mini</p>
-              <p class="text-sm">$32</p>
-              <button class="text-pink-500 text-sm underline">Visitar tienda</button>
+          <div class="producto-card border p-2 flex items-center justify-between" data-nombre="Bolso Mini">
+            <img src="https://placehold.co/80" class="w-16">
+            <div class="ml-2">
+              <p>Bolso Mini</p><p class="text-sm">$32</p>
+              <button class="text-pink-500 text-sm">Visitar tienda</button>
             </div>
             <button class="favorite-btn text-xl" data-id="vida2">♥</button>
           </div>
@@ -106,159 +80,158 @@
       </div>
 
       <!-- Marca 3 -->
-      <div class="border p-4 rounded shadow bg-white brand-card" data-price="medium" data-rating="5" data-category="ropa">
-        <img src="https://via.placeholder.com/150x150" alt="Agave Girl" class="mx-auto">
-        <h3 class="text-xl font-semibold text-center mt-2">Agave Girl Boutique</h3>
-        <p class="text-center text-sm">Inspiración mexicana contemporánea.</p>
-        <p class="text-center font-bold mt-2">Desde $50 USD</p>
-        <p class="text-center text-yellow-400 text-lg">★★★★★</p>
-        <div class="mt-4 space-y-2">
-          <div class="border p-2 rounded flex items-center justify-between">
-            <img src="https://via.placeholder.com/200x200" class="w-16">
-            <div class="flex-1 ml-3">
-              <p>Kimono Bordado</p>
-              <p class="text-sm">$55</p>
-              <button class="text-pink-500 text-sm underline">Visitar tienda</button>
+      <div class="marca-card p-4 bg-white border rounded shadow" data-nombre="Cuidado con el Perro">
+        <img src="https://placehold.co/150x150" alt="Cuidado con el Perro" class="mx-auto mb-2">
+        <h3 class="text-xl font-semibold text-center">Cuidado con el Perro</h3>
+        <p class="text-sm text-center">Casual mexicano económico. Desde $18 USD</p>
+        <p class="text-center text-yellow-400">★★★★☆</p>
+        <div class="space-y-2 mt-4">
+          <div class="producto-card border p-2 flex items-center justify-between" data-nombre="Jeans Básicos">
+            <img src="https://placehold.co/80" class="w-16">
+            <div class="ml-2">
+              <p>Jeans Básicos</p><p class="text-sm">$22</p>
+              <button class="text-pink-500 text-sm">Visitar tienda</button>
+            </div>
+            <button class="favorite-btn text-xl" data-id="perro1">♥</button>
+          </div>
+          <div class="producto-card border p-2 flex items-center justify-between" data-nombre="Sudadera Unisex">
+            <img src="https://placehold.co/80" class="w-16">
+            <div class="ml-2">
+              <p>Sudadera Unisex</p><p class="text-sm">$25</p>
+              <button class="text-pink-500 text-sm">Visitar tienda</button>
+            </div>
+            <button class="favorite-btn text-xl" data-id="perro2">♥</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Marca 4 -->
+      <div class="marca-card p-4 bg-white border rounded shadow" data-nombre="Koaj">
+        <img src="https://placehold.co/150x150" alt="Koaj" class="mx-auto mb-2">
+        <h3 class="text-xl font-semibold text-center">Koaj</h3>
+        <p class="text-sm text-center">Diseño colombiano juvenil. Desde $30 USD</p>
+        <p class="text-center text-yellow-400">★★★★★</p>
+        <div class="space-y-2 mt-4">
+          <div class="producto-card border p-2 flex items-center justify-between" data-nombre="Camisa Slim Fit">
+            <img src="https://placehold.co/80" class="w-16">
+            <div class="ml-2">
+              <p>Camisa Slim Fit</p><p class="text-sm">$35</p>
+              <button class="text-pink-500 text-sm">Visitar tienda</button>
+            </div>
+            <button class="favorite-btn text-xl" data-id="koaj1">♥</button>
+          </div>
+          <div class="producto-card border p-2 flex items-center justify-between" data-nombre="Chamarra Denim">
+            <img src="https://placehold.co/80" class="w-16">
+            <div class="ml-2">
+              <p>Chamarra Denim</p><p class="text-sm">$45</p>
+              <button class="text-pink-500 text-sm">Visitar tienda</button>
+            </div>
+            <button class="favorite-btn text-xl" data-id="koaj2">♥</button>
+          </div>
+        </div>
+      </div>
+      <!-- Marca 5 -->
+      <div class="marca-card p-4 bg-white border rounded shadow" data-nombre="Agave Girl Boutique">
+        <img src="https://placehold.co/150x150" alt="Agave Girl" class="mx-auto mb-2">
+        <h3 class="text-xl font-semibold text-center">Agave Girl Boutique</h3>
+        <p class="text-sm text-center">Estilo mexicano contemporáneo. Desde $50 USD</p>
+        <p class="text-center text-yellow-400">★★★★★</p>
+        <div class="space-y-2 mt-4">
+          <div class="producto-card border p-2 flex items-center justify-between" data-nombre="Kimono Bordado">
+            <img src="https://placehold.co/80" class="w-16">
+            <div class="ml-2">
+              <p>Kimono Bordado</p><p class="text-sm">$55</p>
+              <button class="text-pink-500 text-sm">Visitar tienda</button>
             </div>
             <button class="favorite-btn text-xl" data-id="agave1">♥</button>
           </div>
-          <div class="border p-2 rounded flex items-center justify-between">
-            <img src="https://via.placeholder.com/200x200" class="w-16">
-            <div class="flex-1 ml-3">
-              <p>Falda Floral</p>
-              <p class="text-sm">$48</p>
-              <button class="text-pink-500 text-sm underline">Visitar tienda</button>
+          <div class="producto-card border p-2 flex items-center justify-between" data-nombre="Falda Floral">
+            <img src="https://placehold.co/80" class="w-16">
+            <div class="ml-2">
+              <p>Falda Floral</p><p class="text-sm">$48</p>
+              <button class="text-pink-500 text-sm">Visitar tienda</button>
             </div>
             <button class="favorite-btn text-xl" data-id="agave2">♥</button>
           </div>
         </div>
       </div>
 
-      <!-- Marca 4 -->
-      <div class="border p-4 rounded shadow bg-white brand-card" data-price="high" data-rating="5" data-category="ropa">
-        <img src="https://via.placeholder.com/150x150" alt="Solei Store" class="mx-auto">
-        <h3 class="text-xl font-semibold text-center mt-2">Solei Store</h3>
-        <p class="text-center text-sm">Moda solar con envío premium.</p>
-        <p class="text-center font-bold mt-2">Desde $75 USD</p>
-        <p class="text-center text-yellow-400 text-lg">★★★★★</p>
-        <div class="mt-4 space-y-2">
-          <div class="border p-2 rounded flex items-center justify-between">
-            <img src="https://via.placeholder.com/200x200" class="w-16">
-            <div class="flex-1 ml-3">
-              <p>Mono Lino</p>
-              <p class="text-sm">$78</p>
-              <button class="text-pink-500 text-sm underline">Visitar tienda</button>
+      <!-- Marca 6 -->
+      <div class="marca-card p-4 bg-white border rounded shadow" data-nombre="Solei Store">
+        <img src="https://placehold.co/150x150" alt="Solei Store" class="mx-auto mb-2">
+        <h3 class="text-xl font-semibold text-center">Solei Store</h3>
+        <p class="text-sm text-center">Moda solar y vibrante. Desde $75 USD</p>
+        <p class="text-center text-yellow-400">★★★★★</p>
+        <div class="space-y-2 mt-4">
+          <div class="producto-card border p-2 flex items-center justify-between" data-nombre="Mono Lino">
+            <img src="https://placehold.co/80" class="w-16">
+            <div class="ml-2">
+              <p>Mono Lino</p><p class="text-sm">$78</p>
+              <button class="text-pink-500 text-sm">Visitar tienda</button>
             </div>
             <button class="favorite-btn text-xl" data-id="solei1">♥</button>
           </div>
-          <div class="border p-2 rounded flex items-center justify-between">
-            <img src="https://via.placeholder.com/200x200" class="w-16">
-            <div class="flex-1 ml-3">
-              <p>Chaqueta Crop</p>
-              <p class="text-sm">$82</p>
-              <button class="text-pink-500 text-sm underline">Visitar tienda</button>
+          <div class="producto-card border p-2 flex items-center justify-between" data-nombre="Chaqueta Crop">
+            <img src="https://placehold.co/80" class="w-16">
+            <div class="ml-2">
+              <p>Chaqueta Crop</p><p class="text-sm">$82</p>
+              <button class="text-pink-500 text-sm">Visitar tienda</button>
             </div>
             <button class="favorite-btn text-xl" data-id="solei2">♥</button>
           </div>
         </div>
       </div>
-    </div>
-  </section>
-  <!-- Comparador -->
-  <section class="p-6 bg-white">
-    <h2 class="text-2xl font-bold mb-4">Comparador rápido</h2>
-    <div class="overflow-x-auto">
-      <table class="min-w-full table-auto border">
-        <thead class="bg-gray-100">
-          <tr>
-            <th class="px-4 py-2 text-left">Seleccionar</th>
-            <th class="px-4 py-2 text-left">Marca</th>
-            <th class="px-4 py-2 text-left">Precio Medio</th>
-            <th class="px-4 py-2 text-left">Rating</th>
-            <th class="px-4 py-2 text-left">Envío Internacional</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr class="border-t">
-            <td class="px-4 py-2"><input type="checkbox" /></td>
-            <td class="px-4 py-2">Boho Hunter</td>
-            <td class="px-4 py-2">$40</td>
-            <td class="px-4 py-2">★★★★★</td>
-            <td class="px-4 py-2">Sí</td>
-          </tr>
-          <tr class="border-t">
-            <td class="px-4 py-2"><input type="checkbox" /></td>
-            <td class="px-4 py-2">Shop Mi Vida</td>
-            <td class="px-4 py-2">$25</td>
-            <td class="px-4 py-2">★★★★☆</td>
-            <td class="px-4 py-2">Sí</td>
-          </tr>
-          <tr class="border-t">
-            <td class="px-4 py-2"><input type="checkbox" /></td>
-            <td class="px-4 py-2">Solei Store</td>
-            <td class="px-4 py-2">$75</td>
-            <td class="px-4 py-2">★★★★★</td>
-            <td class="px-4 py-2">Sí</td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-  </section>
 
-  <!-- Logística y Envíos -->
-  <section class="p-6">
-    <h2 class="text-2xl font-bold mb-4">Envíos y logística</h2>
-    <article class="grid grid-cols-1 md:grid-cols-3 gap-4 text-center">
-      <div>
-        <img src="https://via.placeholder.com/60x60" class="mx-auto mb-2" />
-        <p>Envíos rápidos con DHL</p>
+      <!-- Marca 7 -->
+      <div class="marca-card p-4 bg-white border rounded shadow" data-nombre="Basement">
+        <img src="https://placehold.co/150x150" alt="Basement" class="mx-auto mb-2">
+        <h3 class="text-xl font-semibold text-center">Basement</h3>
+        <p class="text-sm text-center">Estilo urbano desde Chile. Desde $35 USD</p>
+        <p class="text-center text-yellow-400">★★★★☆</p>
+        <div class="space-y-2 mt-4">
+          <div class="producto-card border p-2 flex items-center justify-between" data-nombre="Blazer Casual">
+            <img src="https://placehold.co/80" class="w-16">
+            <div class="ml-2">
+              <p>Blazer Casual</p><p class="text-sm">$40</p>
+              <button class="text-pink-500 text-sm">Visitar tienda</button>
+            </div>
+            <button class="favorite-btn text-xl" data-id="basement1">♥</button>
+          </div>
+          <div class="producto-card border p-2 flex items-center justify-between" data-nombre="Pantalón Recto">
+            <img src="https://placehold.co/80" class="w-16">
+            <div class="ml-2">
+              <p>Pantalón Recto</p><p class="text-sm">$38</p>
+              <button class="text-pink-500 text-sm">Visitar tienda</button>
+            </div>
+            <button class="favorite-btn text-xl" data-id="basement2">♥</button>
+          </div>
+        </div>
       </div>
-      <div>
-        <img src="https://via.placeholder.com/60x60" class="mx-auto mb-2" />
-        <p>Seguimiento con FedEx</p>
-      </div>
-      <div>
-        <img src="https://via.placeholder.com/60x60" class="mx-auto mb-2" />
-        <p>Entrega local con Correos</p>
-      </div>
-    </article>
 
-    <div class="mt-6">
-      <h3 class="text-lg font-semibold">Preguntas frecuentes</h3>
-      <details class="mt-2 border p-2 rounded">
-        <summary class="cursor-pointer font-medium">¿Cuánto tardan los envíos?</summary>
-        <p class="mt-2">Entre 5 a 10 días hábiles dependiendo del país de destino.</p>
-      </details>
-      <details class="mt-2 border p-2 rounded">
-        <summary class="cursor-pointer font-medium">¿Desde dónde se envían los productos?</summary>
-        <p class="mt-2">Cada marca despacha desde su país de origen en LATAM.</p>
-      </details>
-    </div>
-  </section>
-
-  <!-- Lookbook -->
-  <section class="p-6 bg-white">
-    <h2 class="text-2xl font-bold mb-4">Tendencias LATAM</h2>
-    <div class="flex overflow-x-auto gap-4 pb-4">
-      <div class="min-w-[200px] bg-gray-100 p-4 rounded">
-        <img src="https://via.placeholder.com/200x200" alt="Look 1">
-        <p class="mt-2">Look bohemio urbano</p>
-      </div>
-      <div class="min-w-[200px] bg-gray-100 p-4 rounded">
-        <img src="https://via.placeholder.com/200x200" alt="Look 2">
-        <p class="mt-2">Tonos tierra en verano</p>
-      </div>
-      <div class="min-w-[200px] bg-gray-100 p-4 rounded">
-        <img src="https://via.placeholder.com/200x200" alt="Look 3">
-        <p class="mt-2">Elegancia casual</p>
-      </div>
-      <div class="min-w-[200px] bg-gray-100 p-4 rounded">
-        <img src="https://via.placeholder.com/200x200" alt="Look 4">
-        <p class="mt-2">Estilo tropical chic</p>
-      </div>
-      <div class="min-w-[200px] bg-gray-100 p-4 rounded">
-        <img src="https://via.placeholder.com/200x200" alt="Look 5">
-        <p class="mt-2">Arte y cultura en moda</p>
+      <!-- Marca 8 -->
+      <div class="marca-card p-4 bg-white border rounded shadow" data-nombre="PatPrimo">
+        <img src="https://placehold.co/150x150" alt="PatPrimo" class="mx-auto mb-2">
+        <h3 class="text-xl font-semibold text-center">PatPrimo</h3>
+        <p class="text-sm text-center">Ropa de calidad a buen precio. Desde $20 USD</p>
+        <p class="text-center text-yellow-400">★★★★☆</p>
+        <div class="space-y-2 mt-4">
+          <div class="producto-card border p-2 flex items-center justify-between" data-nombre="Camiseta Básica">
+            <img src="https://placehold.co/80" class="w-16">
+            <div class="ml-2">
+              <p>Camiseta Básica</p><p class="text-sm">$22</p>
+              <button class="text-pink-500 text-sm">Visitar tienda</button>
+            </div>
+            <button class="favorite-btn text-xl" data-id="patprimo1">♥</button>
+          </div>
+          <div class="producto-card border p-2 flex items-center justify-between" data-nombre="Jean Azul Clásico">
+            <img src="https://placehold.co/80" class="w-16">
+            <div class="ml-2">
+              <p>Jean Azul Clásico</p><p class="text-sm">$28</p>
+              <button class="text-pink-500 text-sm">Visitar tienda</button>
+            </div>
+            <button class="favorite-btn text-xl" data-id="patprimo2">♥</button>
+          </div>
+        </div>
       </div>
     </div>
   </section>
@@ -266,7 +239,7 @@
   <!-- Mis Favoritos -->
   <section class="p-6">
     <h2 class="text-2xl font-bold mb-4">Mis Favoritos ♥</h2>
-    <div id="favoritos-lista" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4"></div>
+    <div id="favoritos-lista" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4"></div>
     <p id="favoritos-vacio" class="text-gray-500">No has agregado productos aún.</p>
   </section>
 
@@ -274,9 +247,9 @@
   <footer class="bg-gray-900 text-white p-6 mt-12">
     <div class="flex flex-col md:flex-row justify-between items-center gap-4">
       <div class="space-x-4">
-        <a href="#"><img src="https://via.placeholder.com/30" alt="Instagram" class="inline"></a>
-        <a href="#"><img src="https://via.placeholder.com/30" alt="TikTok" class="inline"></a>
-        <a href="#"><img src="https://via.placeholder.com/30" alt="Pinterest" class="inline"></a>
+        <a href="#"><img src="https://placehold.co/30x30" alt="Instagram" class="inline"></a>
+        <a href="#"><img src="https://placehold.co/30x30" alt="TikTok" class="inline"></a>
+        <a href="#"><img src="https://placehold.co/30x30" alt="Pinterest" class="inline"></a>
       </div>
       <form action="#" method="POST" class="flex">
         <input type="email" placeholder="Tu correo..." class="p-2 rounded-l text-black">
@@ -288,45 +261,53 @@
     </div>
   </footer>
 
-  <!-- JS Funcionalidad -->
+  <!-- JavaScript -->
   <script>
-    // Guardar favoritos en localStorage
     const botonesFavorito = document.querySelectorAll('.favorite-btn');
     const favoritosLista = document.getElementById('favoritos-lista');
     const favoritosVacio = document.getElementById('favoritos-vacio');
 
-    const renderFavoritos = () => {
-      const favoritos = JSON.parse(localStorage.getItem('favoritos') || '[]');
+    function renderFavoritos() {
+      const favs = JSON.parse(localStorage.getItem('favoritos') || '[]');
       favoritosLista.innerHTML = '';
-      if (favoritos.length === 0) {
+      if (favs.length === 0) {
         favoritosVacio.style.display = 'block';
-      } else {
-        favoritosVacio.style.display = 'none';
-        favoritos.forEach(id => {
-          const card = document.querySelector(`[data-id="${id}"]`).parentElement.cloneNode(true);
-          favoritosLista.appendChild(card);
-        });
+        return;
       }
-    };
+      favoritosVacio.style.display = 'none';
+      favs.forEach(id => {
+        const original = document.querySelector(`[data-id="${id}"]`);
+        if (original) {
+          favoritosLista.appendChild(original.parentElement.cloneNode(true));
+        }
+      });
+    }
 
     botonesFavorito.forEach(btn => {
       btn.addEventListener('click', () => {
         const id = btn.dataset.id;
-        let favoritos = JSON.parse(localStorage.getItem('favoritos') || '[]');
-        if (!favoritos.includes(id)) favoritos.push(id);
-        localStorage.setItem('favoritos', JSON.stringify(favoritos));
+        let favs = JSON.parse(localStorage.getItem('favoritos') || '[]');
+        if (!favs.includes(id)) favs.push(id);
+        localStorage.setItem('favoritos', JSON.stringify(favs));
         renderFavoritos();
       });
     });
 
     renderFavoritos();
 
-    // Simulación de filtros
-    document.querySelectorAll('.filter').forEach(filtro => {
-      filtro.addEventListener('change', () => {
-        console.log("Filtro cambiado"); // Aquí podría ir lógica real
+    function buscar() {
+      const valor = document.getElementById('buscador').value.toLowerCase();
+      document.querySelectorAll('.marca-card').forEach(card => {
+        const nombreMarca = card.dataset.nombre.toLowerCase();
+        const productos = card.querySelectorAll('.producto-card');
+        let visible = nombreMarca.includes(valor);
+        productos.forEach(p => {
+          const nombreProducto = p.dataset.nombre.toLowerCase();
+          if (nombreProducto.includes(valor)) visible = true;
+        });
+        card.style.display = visible ? 'block' : 'none';
       });
-    });
+    }
   </script>
 </body>
 </html>
